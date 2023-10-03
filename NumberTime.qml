@@ -1,0 +1,67 @@
+import QtQuick
+
+
+Text{
+    id:number
+    font.pointSize: 24; font.weight: Font.DemiBold
+
+    MouseArea{
+        anchors.fill: parent
+        hoverEnabled: true
+        onHoveredChanged: {
+            if (containsMouse) {
+                number.state = "hovered"
+            } else {
+                number.state = "unhovered"
+            }
+        }
+
+    }
+
+    states: [
+        State {
+            name: "hovered"
+            PropertyChanges {
+                target: number
+                font.weight: Font.Black
+                color: "red"
+                font.pointSize: 30
+
+            }
+        },
+        State{
+            name:"unhovered"
+            PropertyChanges {
+                target: number
+                font.weight: Font.DemiBold
+                color: "black"
+                font.pointSize: 24
+
+            }
+        }
+
+    ]
+
+    transitions: [
+        Transition {
+            from: "*"
+            to:"*"
+            PropertyAnimation{
+                property: "Font.weight"
+                duration: 100
+                easing.type: Easing.InOutQuint
+            }
+            PropertyAnimation{
+                property: "color"
+                duration: 100
+                easing.type: Easing.InOutQuint
+            }
+            PropertyAnimation{
+                property: "font.pointSize"
+                duration: 100
+                easing.type: Easing.InOutQuint
+            }
+        }
+
+    ]
+}
